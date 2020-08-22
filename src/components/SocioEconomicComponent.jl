@@ -15,7 +15,7 @@
 	globalincome = Variable(index=[time])
 
 	ypc90 = Variable(index=[regions])
-
+    
 
 	pgrowth             = Parameter(index=[time,regions])
 	ypcgrowth           = Parameter(index=[time,regions])
@@ -32,12 +32,12 @@
 	pop90   = Parameter(index=[regions])
 	urbcorr = Parameter(index=[regions])
 	gdp0    = Parameter(index=[regions])
+    
 
-
-	runwithoutdamage = Parameter{Bool}(default = false)
-	consleak    = Parameter(default = 0.25)
-	plusel      = Parameter(default = 0.25)
-    savingsrate = Parameter(default = 0.2)
+	runwithoutdamage = Parameter{Bool}(default=false)
+	consleak    = Parameter(default=0.25)
+	plusel      = Parameter(default=0.25)
+    savingsrate = Parameter(default=0.2)
 
     function run_timestep(p, v, d, t)
 
@@ -79,7 +79,7 @@
             end
 
             for r in d.regions
-                v.consumption[t, r] = max(v.income[t, r] * 1000000000.0 * (1.0 - p.savingsrate) - (p.runwithoutdamage ? 0.0 :   (p.eloss[t - 1, r] + p.sloss[t - 1, r]) * 1000000000.0),0.0)
+                v.consumption[t, r] = max(v.income[t, r] * 1000000000.0 * (1.0 - p.savingsrate) - (p.runwithoutdamage ? 0.0 :   (p.eloss[t - 1, r] + p.sloss[t - 1, r]) * 1000000000.0), 0.0)
             end
             v.globalconsumption[t] = sum(v.consumption[t,:])
 

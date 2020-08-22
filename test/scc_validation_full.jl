@@ -23,7 +23,7 @@ specs = Dict([
     :pulse_size => [1, 1e7]
 ])
 
-results = DataFrame(gas = [], year = [], eta = [], prtp = [], equity_weights = [], equity_weights_normalization_region = [], last_year = [], pulse_size = [], SC = [])
+results = DataFrame(gas=[], year=[], eta=[], prtp=[], equity_weights=[], equity_weights_normalization_region=[], last_year=[], pulse_size=[], SC=[])
 
 for gas in specs[:gas]
     for year in specs[:year]
@@ -45,4 +45,4 @@ for gas in specs[:gas]
 end
 
 validation_results = load(joinpath(datadir, "deterministic_sc_values.csv")) |> DataFrame
-@test all(isapprox.(results[!, :SC], validation_results[!, :SC], atol = 1e-11))
+@test all(isapprox.(results[!, :SC], validation_results[!, :SC], atol=1e-11))
